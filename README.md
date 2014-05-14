@@ -31,8 +31,9 @@ Look at the en-sample.txt de-sample.txt (uncompress them) and align-sample.txt
 ===============================================
 
 Running the projection program:-
+'''shell
 ./project_vectors.sh Lang1VectorFile Lang2VectorFile WordAlignFile OutFile Ratio
-
+'''
 where, Ratio is a float from 1 to 0. It is the fraction of the original
 vector length that you want your projected vectors to have.
 
