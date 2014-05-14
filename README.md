@@ -36,8 +36,22 @@ Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sam
 where, Ratio is a float from 1 to 0. It is the fraction of the original
 vector length that you want your projected vectors to have.
 
-
 ###Output
 Two files of names: ```OutFile_orig1_projected.txt```, ```OutFile_orig2_projected.txt```
 
 which are you new projected word vectors, enjoy ! :D
+
+###Reference
+
+```@InProceedings{faruqui-dyer:2014:EACL,
+  author    = {Faruqui, Manaal  and  Dyer, Chris},
+  title     = {Improving Vector Space Word Representations Using Multilingual Correlation},
+  booktitle = {Proceedings of the 14th Conference of the European Chapter of the Association for Computational Linguistics},
+  month     = {April},
+  year      = {2014},
+  address   = {Gothenburg, Sweden},
+  publisher = {Association for Computational Linguistics},
+  pages     = {462--471},
+  url       = {http://www.aclweb.org/anthology/E14-1049}
+}
+```
