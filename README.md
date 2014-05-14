@@ -10,7 +10,7 @@ lexical semantic evaluation tasks.
 ###Requirements:-
 
 1. Python 2.7
-2. Matlab 2013
+2. Matlab accessible from the shell
 
 ###Data you need:-
 1. Language1 Word Vector File 
