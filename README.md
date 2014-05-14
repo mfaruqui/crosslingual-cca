@@ -43,7 +43,8 @@ which are you new projected word vectors, enjoy ! :D
 
 ###Reference
 
-```@InProceedings{faruqui-dyer:2014:EACL,
+```
+@InProceedings{faruqui-dyer:2014:EACL,
   author    = {Faruqui, Manaal  and  Dyer, Chris},
   title     = {Improving Vector Space Word Representations Using Multilingual Correlation},
   booktitle = {Proceedings of the 14th Conference of the European Chapter of the Association for Computational Linguistics},
