@@ -31,7 +31,7 @@ Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sam
 
 ```./project_vectors.sh Lang1VectorFile Lang2VectorFile WordAlignFile OutFile Ratio```
 
-```./project_vectors.sh de-sample.txt en-sample.txt align-sample.txt out 0.5```
+```./project_vectors.sh en-sample.txt de-sample.txt align-sample.txt out 0.5```
 
 where, Ratio is a float from 1 to 0. It is the fraction of the original
 vector length that you want your projected vectors to have.
