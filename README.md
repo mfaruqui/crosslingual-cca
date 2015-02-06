@@ -27,7 +27,7 @@ The word alignment file should have the following format (one word pair per line
 
 Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sample.txt```
 
-###Running the projection program
+###Projecting the embeddings in both languages to a shared space:
 
 ```./project_vectors.sh Lang1VectorFile Lang2VectorFile WordAlignFile OutFile Ratio```
 
@@ -36,10 +36,22 @@ Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sam
 where, Ratio is a float from 1 to 0. It is the fraction of the original
 vector length that you want your projected vectors to have.
 
-###Output
+####Output
 Two files of names: ```OutFile_orig1_projected.txt```, ```OutFile_orig2_projected.txt```
 
 which are you new projected word vectors, enjoy ! :D
+
+###Projecting the embeddings of language 1 to the vector space of language 2:
+```./project_vectors_to_lang2.sh Lang1VectorFile Lang2VectorFile WordAlignFile ProjectionFromLang1SpaceToLang2Space Lang1WordEmbeddingsProjectedToLang2Space```
+
+```./project_vectors.sh en-sample.txt de-sample.txt align-sample.txt en-de-projection projected-en-word-embeddings```
+
+Unlike ``project_vectors.sh``, the number of columns (i.e., size of word embeddings) in ``Lang1VectorFile`` and ``Lang2VectorFile`` must match when using ``project_vectors_to_lang2.sh``. The number of rows (i.e., vocabulary size) may be different. Otherwise, the input files to ``project_vectors_to_lang2.sh`` are identical to those of ``project_vectors.sh``.
+
+####Output
+``ProjectionFromLang1SpaceToLang2Space`` is a serialization of a squared matrix with each dimension equal to the word embeddings length in ``Lang1VectorFile`` (or ``Lang2VectorFile``; they must match). The standard canonical correlation analysis returns two matrices (A, B) which represent the linear transformation from language 1 vector space to the shared space, and from language 2 vector space to the shared space, respectively. The matrix in this file is the result of AB<sup>-1</sup>.
+
+``Lang1WordEmbeddingsProjectedToLang2Space`` consists of word embeddings for language 1 words (as read from Lang1VectorFile), projected to the vector space in which language 2 vectors live.
 
 ###Reference
 
