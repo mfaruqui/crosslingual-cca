@@ -31,7 +31,7 @@ Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sam
 
 ```./project_vectors.sh Lang1VectorFile Lang2VectorFile WordAlignFile OutFile Ratio```
 
-```./project_vectors.sh de-sample.txt en-sample.txt align-sample.txt out 0.5```
+```./project_vectors.sh en-sample.txt de-sample.txt align-sample.txt out 0.5```
 
 where, Ratio is a float from 1 to 0. It is the fraction of the original
 vector length that you want your projected vectors to have.
@@ -47,12 +47,7 @@ which are you new projected word vectors, enjoy ! :D
 @InProceedings{faruqui-dyer:2014:EACL,
   author    = {Faruqui, Manaal  and  Dyer, Chris},
   title     = {Improving Vector Space Word Representations Using Multilingual Correlation},
-  booktitle = {Proceedings of the 14th Conference of the European Chapter of the Association for Computational Linguistics},
-  month     = {April},
-  year      = {2014},
-  address   = {Gothenburg, Sweden},
-  publisher = {Association for Computational Linguistics},
-  pages     = {462--471},
-  url       = {http://www.aclweb.org/anthology/E14-1049}
+  booktitle = {Proceedings of EACL},
+  year      = {2014}
 }
 ```
