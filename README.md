@@ -23,7 +23,7 @@ Each vector file should have one word vector per line as follows (space delimite
 
 The word alignment file should have the following format (one word pair per line):-
 
-```lang2word ||| lang1word```
+```lang1word ||| lang2word```
 
 Look at the ```en-sample.txt de-sample.txt``` (uncompress them) and ```align-sample.txt```
 
