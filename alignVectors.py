@@ -37,7 +37,7 @@ def get_aligned_vectors(wordAlignFile, lang1WordVectors, lang2WordVectors):
   alignedVectors = {}
   lenLang1Vector = len(lang1WordVectors[lang1WordVectors.keys()[0]])
   for line in open(wordAlignFile, 'r'):
-    lang2Word, lang1Word = line.strip().split(" ||| ")
+    lang1Word, lang2Word = line.strip().split(" ||| ")
     if lang2Word not in lang2WordVectors: continue
     if lang1Word not in lang1WordVectors: continue
     alignedVectors[lang2Word] = numpy.zeros(lenLang1Vector, dtype=float)
