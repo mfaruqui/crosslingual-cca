@@ -20,8 +20,8 @@ branchings = linkage(embeddings, 'ward', 'euclidean');
 
 % write output file
 dlmwrite(output_branchings, embeddings_rows, ' ');
-dlmwrite(output_branchings, branchings,'-append',...
-         'delimiter',' ');
+dlmwrite(output_branchings, branchings, '-append', ...
+         'delimiter', ' ', 'precision', 10);
 
 % Delete all matrices from memory
 clear;
