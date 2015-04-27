@@ -13,13 +13,14 @@ argparser.add_argument("-o", "--output_filename", help='output word cluster bits
 args = argparser.parse_args()
 
 print "Clustering word vectors..."
-os.system('matlab -nodesktop -nosplash -nojvm -nodisplay -r "cluster_embeddings({}, {}); exit"'.format("'"+args.input_filename+"'", "'"+args.output_filename + "temp'"))
+temp_filename = args.output_filename + "temp"
+os.system('matlab -nodesktop -nosplash -nojvm -nodisplay -r "cluster_embeddings({}, {}); exit"'.format("'"+ args.input_filename + "'", "'" + temp_filename + "'"))
 
 # read branchings (bottom up)
 print "Reading the hierarchy..."
 parent_to_children_cluster_ids = {}
 child_to_parent_and_direction = {}
-with io.open(args.output_filename + "temp", encoding='utf8') as branchings_file:
+with io.open(temp_filename, encoding='utf8') as branchings_file:
   # first line consists of an integer, the number of vectors in input file
   vectors_count = int(branchings_file.readline())
   assert(vectors_count > 0)
@@ -64,18 +65,19 @@ while len(traversal_stack):
   print 'pushed right_cluster_id = {}'.format(right_cluster_id)
   nodes_counter += 1
   print('{} bitstrings computed, the last of which is {} for cluster id {}. stack size = {}'.format(nodes_counter, right_cluster_bitstring, right_cluster_id, len(traversal_stack)))
-  if nodes_counter % 1000 == 0:
-    raw_input("Hit the enter key to continue: ") 
 assert(len(cluster_id_to_bitstring) == 2 * vectors_count - 1)
 
 # persist.
 print "Writing bitstrings to file..."
 with io.open(args.input_filename, encoding='utf8') as word_vectors_file, io.open(args.output_filename, encoding='utf8', mode='w') as cluster_bitstrings_file:
+  metadata = word_vectors_file.readline();
+  print 'the first line in {} which reads "{}" has been ignored'.format(args.input_filename, metadata.strip())
   lines_counter = 1
   for line in word_vectors_file:
     current_word = line.split(' ')[0]
     current_bitstring = cluster_id_to_bitstring[lines_counter]
     cluster_bitstrings_file.write(u'{} {}\n'.format(current_word, current_bitstring))
+    print 'word={}, cluster_id={}, bitstring={}'.format(current_word, lines_counter, current_bitstring)
     lines_counter += 1
 
 print "Done."
