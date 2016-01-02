@@ -26,7 +26,7 @@ def save_orig_subset_and_aligned(outFileName, lang2WordVectors, lang1AlignedVect
   outFile = open(outFileName+'_orig_subset.txt','w')
   for word in lang1AlignedVectors:
     outFile.write(word+' '+' '.join([str(val) for val in lang2WordVectors[word]])+'\n')
-  outFile.close()  
+  outFile.close()
   
   outFile = open(outFileName+'_new_aligned.txt','w')
   for word in lang1AlignedVectors:

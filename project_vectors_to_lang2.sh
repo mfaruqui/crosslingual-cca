@@ -15,12 +15,12 @@ echo "Aligning vectors..."
 python alignVectors.py -w1 $1 -w2 $2 -a $3 -o temp
 # alignVectors.py writes two files: temp_orig_subset.txt, temp_new_aligned.txt.
 # Give them better names.
-mv temp_orig_subset.txt temp_aligned_lang1_embeddings
-mv temp_new_aligned.txt temp_aligned_lang2_embeddings
+mv temp_orig_subset.txt temp_aligned_lang2_embeddings
+mv temp_new_aligned.txt temp_aligned_lang1_embeddings
 
 # Find a "shared" vector space such that the projected words from lang1 vector
 # space and the projected of aligned words in lang2 vector space are maximally
-# correlated. Assume linear transformations. Finally, project all lang1 word
+# correlated. Assume linear transformations. Then, project all lang1 word
 # vectors from the lang1 vector space to lang2 vector space (via the shared 
 # space).
 echo "Projecting vectors..."
