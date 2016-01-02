@@ -44,9 +44,7 @@ cluster_id_to_bitstring = {root_cluster_id:''}
 traversal_stack = [root_cluster_id]
 nodes_counter = 0
 while len(traversal_stack):
-  print 'stack={}'.format(traversal_stack)
   current_cluster_id = traversal_stack.pop()
-  print 'popped current_cluster_id={}'.format(current_cluster_id)
   # leaf?
   if current_cluster_id <= vectors_count:
     assert(current_cluster_id in child_to_parent_and_direction)
@@ -61,10 +59,7 @@ while len(traversal_stack):
   cluster_id_to_bitstring[left_cluster_id], cluster_id_to_bitstring[right_cluster_id] = left_cluster_bitstring, right_cluster_bitstring
   traversal_stack.append(left_cluster_id)
   traversal_stack.append(right_cluster_id)
-  print 'pushed left_cluster_id = {}'.format(left_cluster_id)
-  print 'pushed right_cluster_id = {}'.format(right_cluster_id)
   nodes_counter += 1
-  print('{} bitstrings computed, the last of which is {} for cluster id {}. stack size = {}'.format(nodes_counter, right_cluster_bitstring, right_cluster_id, len(traversal_stack)))
 assert(len(cluster_id_to_bitstring) == 2 * vectors_count - 1)
 
 # persist.
@@ -77,7 +72,6 @@ with io.open(args.input_filename, encoding='utf8') as word_vectors_file, io.open
     current_word = line.split(' ')[0]
     current_bitstring = cluster_id_to_bitstring[lines_counter]
     cluster_bitstrings_file.write(u'{} {}\n'.format(current_word, current_bitstring))
-    print 'word={}, cluster_id={}, bitstring={}'.format(current_word, lines_counter, current_bitstring)
     lines_counter += 1
 
 print "Done."

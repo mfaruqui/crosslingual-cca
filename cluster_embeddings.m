@@ -6,7 +6,6 @@ function cluster_embeddings(input_word_embeddings, output_branchings)
 % first column is words, hence not being read.
 % first row is metadata
 embeddings = dlmread(input_word_embeddings, ' ', 1, 1);
-disp(embeddings);
 
 % word2vec embeddings have a trailing space which matlab parses as an additional
 % column of all zeros. If the last column is all zeros, remove it.
