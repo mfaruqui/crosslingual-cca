@@ -3,9 +3,20 @@ function project_vectors_to_lang2(lang1_words_in_lang1_space_filename, lang2_wor
 % first column is words, hence not being read. first row is meta data, hence not read. 
 lang1_words_in_lang1_space = dlmread(lang1_words_in_lang1_space_filename, ' ', 1, 1);
 lang2_words_in_lang2_space = dlmread(lang2_words_in_lang2_space_filename, ' ', 1, 1);
+
+% fix dimensions if needed
+lang1_words_in_lang1_space=lang1_words_in_lang1_space(:,1:min(size(lang1_words_in_lang1_space,2),size(lang2_words_in_lang2_space,2)));
+lang2_words_in_lang2_space=lang2_words_in_lang2_space(:,1:min(size(lang1_words_in_lang1_space,2),size(lang2_words_in_lang2_space,2)));
+
 % first column is words, hence not read.
 aligned_lang1_words_in_lang1_space = dlmread(aligned_lang1_words_in_lang1_space_filename, ' ', 0, 1);
 aligned_lang2_words_in_lang2_space = dlmread(aligned_lang2_words_in_lang2_space_filename, ' ', 0, 1);
+
+% debug info
+size(lang1_words_in_lang1_space)
+size(lang2_words_in_lang2_space)
+size(aligned_lang1_words_in_lang1_space)
+size(aligned_lang2_words_in_lang2_space)
 
 % Normalize all the matrices by rows
 lang1_words_in_lang1_space = normr(lang1_words_in_lang1_space);
