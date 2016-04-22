@@ -12,11 +12,11 @@ set -e
 
 # Get the aligned vectors from lang1 for English (lang2).
 echo "Aligning vectors..."
-python alignVectors.py -w1 $1 -w2 $2 -a $3 -o temp
-# alignVectors.py writes two files: temp_orig_subset.txt, temp_new_aligned.txt.
+python alignVectors.py -w1 $1 -w2 $2 -a $3 -o $4
+# alignVectors.py writes two files: $4_orig_subset.txt, $4_new_aligned.txt.
 # Give them better names.
-mv temp_orig_subset.txt temp_aligned_lang2_embeddings
-mv temp_new_aligned.txt temp_aligned_lang1_embeddings
+mv $4_orig_subset.txt $4_aligned_lang2_embeddings
+mv $4_new_aligned.txt $4_aligned_lang1_embeddings
 
 # Find a "shared" vector space such that the projected words from lang1 vector
 # space and the projected of aligned words in lang2 vector space are maximally
@@ -24,15 +24,15 @@ mv temp_new_aligned.txt temp_aligned_lang1_embeddings
 # vectors from the lang1 vector space to lang2 vector space (via the shared 
 # space).
 echo "Projecting vectors..."
-matlab -nodesktop -nosplash -nojvm -nodisplay -r "project_vectors_to_lang2('$1','$2', 'temp_aligned_lang1_embeddings', 'temp_aligned_lang2_embeddings', '$4', 'temp_lang1_words_in_lang2_space', 'temp_lang2_words_in_lang2_space'); exit"
+matlab -nodesktop -nosplash -nojvm -nodisplay -r "project_vectors_to_lang2('$1','$2', '$4_aligned_lang1_embeddings', '$4_aligned_lang2_embeddings', '$4', '$4_lang1_words_in_lang2_space', '$4_lang2_words_in_lang2_space'); exit"
 
 # Do some post-processing for English
 echo "Some post-processing..."
-cut -f1 -d" " $1 | sed -n '1!p' > temp_lang1_words
-cut -f1 -d" " $2 | sed -n '1!p' > temp_lang2_words
-python paste.py -1 temp_lang1_words -2 temp_lang1_words_in_lang2_space -o $5 -d" "
-python paste.py -1 temp_lang2_words -2 temp_lang2_words_in_lang2_space -o $6 -d" "
-#rm -f temp*
+cut -f1 -d" " $1 | sed -n '1!p' > $4_lang1_words
+cut -f1 -d" " $2 | sed -n '1!p' > $4_lang2_words
+python paste.py -1 $4_lang1_words -2 $4_lang1_words_in_lang2_space -o $5 -d" "
+python paste.py -1 $4_lang2_words -2 $4_lang2_words_in_lang2_space -o $6 -d" "
+#rm -f $4_*
 
 echo "The linear projection matrix between lang1->lang2 spaces can be found at " $4
 echo "Embeddings of lang1 words, projected to lang2 space, can be found at " $5
