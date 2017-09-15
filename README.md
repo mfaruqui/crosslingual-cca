@@ -1,5 +1,5 @@
 #Cross-lingual Word Vectors Projection Using CCA
-Manaal Faruqui, mfaruqui@cs.cmu.edu
+Manaal Faruqui, manaalfar@gmail.com
 
 This tool can be used to project vectors of two different languages
 in the same space where they are maximally correlated. This tool is
